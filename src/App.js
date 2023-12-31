@@ -1,25 +1,21 @@
-import logo from './logo.svg';
 import './App.css';
+import DOMPurify from 'dompurify';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const blog=`
+  <h3>This is a blog title </h3>
+  <p>This is some blog text. There could be <b>bold</b> elements as well as <i>italic</i> elements here! <p>
+  
+ `;
+
+ const sanitizedBlog=DOMPurify.sanitize(blog)
+ return (
+   <div className="App">
+     <div dangerouslySetInnerHTML={{__html: sanitizedBlog}}>
+     </div>
+   </div>
+ );
 }
+
 
 export default App;
